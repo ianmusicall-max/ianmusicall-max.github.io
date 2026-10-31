@@ -17,6 +17,9 @@
   --rojo: #C94B3F;
   --verde: #3E8E55;
   --facebook: #1877F2;
+  /* Fondo del bloque de anuncio: un gris apenas mas oscuro que el papel, para
+     que el bloque se lea como lo que es y no se confunda con un articulo. */
+  --panel-ad: #EFEEEA;
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -71,13 +74,15 @@ ul.datos { padding-left: 20px; margin: 0 0 1em; }
 ul.datos li { margin-bottom: .4em; }
 ol.pasos, ol.beneficios { padding-left: 22px; }
 ol.pasos li, ol.beneficios li { margin-bottom: .6em; }
-table.ranking { width: 100%; border-collapse: collapse; margin: 0 0 1em; font-size: .95rem; }
-table.ranking th, table.ranking td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--divisor); vertical-align: top; }
-table.ranking th { font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; color: var(--gris); }
+table.ranking, table.pares { width: 100%; border-collapse: collapse; margin: 0 0 1em; font-size: .95rem; }
+table.ranking th, table.ranking td, table.pares th, table.pares td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--divisor); vertical-align: top; }
+table.ranking th, table.pares th { font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; color: var(--gris); }
 .cifra { font-weight: 800; white-space: nowrap; }
 .dos, .balanza { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 0 0 1em; }
 .lado, .franja, .eleccion, .tarjeta { background: var(--fondo); border-radius: 12px; padding: 16px; border: 1px solid var(--divisor); }
 .lado ul { padding-left: 18px; margin: 0; }
+.rotulo { font-size: .78rem; text-transform: uppercase; letter-spacing: .08em;
+          color: var(--gris); font-weight: 700; margin: 0 0 .3em; }
 .veredicto { color: var(--acento-oscuro); font-weight: 700; margin: .2em 0 .6em; }
 .pastilla { display: inline-block; background: var(--borde); color: var(--tinta); font-weight: 800; font-size: .8rem; letter-spacing: .06em; padding: 4px 12px; border-radius: 999px; margin-bottom: 8px; }
 .creencia { font-size: 1.15rem; font-style: italic; }
@@ -101,7 +106,65 @@ table.ranking th { font-size: .8rem; text-transform: uppercase; letter-spacing: 
 .seguir p { margin: 0 0 6px; flex: 1 1 100%; }
 .boton { display: inline-block; text-decoration: none; font-weight: 700; padding: 10px 16px; border-radius: 999px; font-size: .95rem; }
 .boton.fb { background: var(--facebook); color: #fff; }
-.anuncio { margin: 1.4em 0; text-align: center; }
+/* La nota principal de la portada: la foto a la izquierda y el texto al lado,
+   apilados en el telefono. Es lo unico que rompe la grilla, a proposito: da
+   una entrada clara y deja ver de que va la pagina sin leer ocho titulares. */
+.destacada {
+  display: grid; grid-template-columns: 1fr; gap: 20px; align-items: center;
+  background: var(--blanco); border: 1px solid var(--divisor); border-radius: 16px;
+  padding: 18px; margin-bottom: 26px;
+}
+.destacada img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px; max-height: 420px; }
+.destacada h2 { font-size: clamp(1.4rem, 3.6vw, 2rem); margin: 6px 0 14px; padding: 0; border: 0; }
+.destacada h2 a { color: var(--tinta); text-decoration: none; }
+.destacada .bajada { color: var(--gris); }
+.destacada .meta { margin: 0; }
+.destacada .cifra-caja { margin-bottom: 14px; }
+
+/* La caja de la cifra: lo que distingue a esta pagina de cualquier otra de
+   nutricion. El lector llega buscando un numero y lo ve sin bajar. Usa la
+   caja de cierre de los flyers -relleno celeste, borde salmon- para que se
+   reconozca al venir de Facebook. */
+.cifra-caja {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px;
+  background: var(--caja); border: 3px solid var(--borde); border-radius: 14px;
+  padding: 14px 18px; margin: 0 0 18px;
+}
+.cifra-caja b { font-size: 2rem; font-weight: 800; line-height: 1; }
+.cifra-caja i { font-style: normal; font-size: .95rem; color: var(--gris); font-weight: 600; }
+
+/* La misma cifra, chica, en las tarjetas del listado. */
+.cifra-chip { margin: 0 14px 8px; font-size: 1.15rem; font-weight: 800; line-height: 1.2; }
+.cifra-chip small { display: block; font-size: .8rem; font-weight: 600; color: var(--gris); margin-top: 2px; }
+
+/* La franja de recetas de la portada: la foto es el contenido, asi que va
+   grande y cuadrada. Sale de los articulos del formato receta que ya existen. */
+.franja-recetas { margin-top: 36px; border-top: 3px solid var(--tinta); padding-top: 18px; }
+.franja-recetas h2 { font-size: 1rem; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 16px; padding: 0; border: 0; }
+.platos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.platos a { display: block; color: var(--tinta); }
+.platos img { aspect-ratio: 1; object-fit: cover; border-radius: 12px; width: 100%; }
+.platos span { display: block; margin-top: 9px; font-weight: 700; font-size: .95rem; line-height: 1.3; }
+.ver-mas { margin-top: 16px; font-weight: 700; font-size: .9rem; }
+.ver-mas a { color: var(--acento-oscuro); }
+
+/* El bloque de anuncio.
+   - min-height reserva el hueco: el anuncio llega despues de que la pagina se
+     dibujo, y sin reserva el texto salta. Eso es el Cumulative Layout Shift
+     que Google mide y usa para rankear.
+   - El panel lo separa del articulo: casi todos los anuncios son imagenes de
+     fondo blanco, y sobre el crema de la pagina se confunden con contenido.
+   - El rotulo dice "Publicidad" y nada mas. Es el unico texto que Google
+     admite alrededor del bloque; cualquier otro puede leerse como que el
+     anuncio es contenido del sitio, y eso cierra cuentas. */
+.anuncio {
+  margin: 1.8em 0; text-align: center; min-height: 180px;
+  background: var(--panel-ad); border-radius: 12px; padding: 10px 10px 14px;
+}
+.rotulo-ad {
+  display: block; font-size: .65rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gris); margin-bottom: 8px;
+}
 .mas { max-width: 720px; margin: 36px auto 0; }
 .mas h2 { margin-top: 0; }
 
@@ -111,8 +174,10 @@ table.ranking th { font-size: .8rem; text-transform: uppercase; letter-spacing: 
 .pie .enlaces a { color: var(--acento-oscuro); }
 
 @media (min-width: 600px) {
+  .platos { grid-template-columns: repeat(4, 1fr); }
   .dos, .balanza { grid-template-columns: 1fr 1fr; }
   .tres { grid-template-columns: 1fr 1fr 1fr; }
   .articulo { padding: 32px 36px 36px; }
+  .destacada { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); }
   h1 { font-size: 2.2rem; }
 }
