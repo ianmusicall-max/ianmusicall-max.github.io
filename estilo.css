@@ -376,7 +376,7 @@ input[type=search], select, .herramienta input[type=url], .herramienta textarea,
 :root[data-tema=oscuro] .tema-vida-activa { background: #4d402c; color: #f8deb0; }
 :root[data-tema=oscuro] .tema-actualidad { background: #50372f; color: #ffd4c6; }
 @media print {
- :root, :root[data-tema=oscuro] { --fondo: white; --blanco: white; --tinta: #141414; --gris: #555; --divisor: #aaa; --sombra: none; color-scheme: light; }
+ :root, :root[data-tema=oscuro], :root:not([data-tema=claro]):not([data-tema=oscuro]) { --fondo: white; --blanco: white; --tinta: #141414; --gris: #555; --divisor: #aaa; --sombra: none; color-scheme: light; }
  .cambiar-tema, .volver-arriba, #progreso-lectura, .etiqueta-tema { display: none !important; }
  .por-aparecer, .aparece { opacity: 1 !important; transform: none !important; animation: none !important; }
  .articulo { box-shadow: none; }
@@ -390,4 +390,8 @@ input[type=search], select, .herramienta input[type=url], .herramienta textarea,
  .cabecera .marca img { width: 36px; height: 36px; }
  .cambiar-tema { font-size: 0; width: 42px; height: 42px; flex-shrink: 0; margin-bottom: 0; padding: 6px; }
  .cambiar-tema::before { content: attr(data-icono); font-size: 1.3rem; line-height: 1; }
+}
+
+@media (prefers-color-scheme: dark) {
+ :root:not([data-tema=claro]):not([data-tema=oscuro]) .marca img { filter: invert(1); }
 }
