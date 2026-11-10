@@ -104,7 +104,7 @@
     const nutrient = document.querySelector('#nutriente'), left = document.querySelector('#alimento-a'), right = document.querySelector('#alimento-b'), status = document.querySelector('#estado-comparador'), result = document.querySelector('#resultado-comparador');
     let foods = [];
     const option = (value, label) => {const node = element('option', label); node.value = value;return node;};
-    const number = value => value > 0 && value < 0.0001 ? '<0,0001' : new Intl.NumberFormat('es', {maximumFractionDigits: 4, minimumFractionDigits: 0}).format(value);
+    const number = value => value > 0 && value < 0.01 ? '<0,01' : new Intl.NumberFormat('es', {maximumFractionDigits: 2, minimumFractionDigits: 0}).format(value);
     function renderComparison() {
       const a = foods[Number(left.value)], b = foods[Number(right.value)];result.replaceChildren();if (!a || !b) return;
       status.textContent = `${a.nutriente}: misma cantidad de alimento, 100 g`;
