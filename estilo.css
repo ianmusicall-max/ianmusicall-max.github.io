@@ -239,3 +239,36 @@ input[type=search], select { padding: 10px 12px; border: 1px solid var(--divisor
 main.ancho { padding-top: 24px; padding-bottom: 48px; }
 .destacada img { object-fit: contain; max-height: 520px; background: var(--fondo); }
 @media print { main.ancho { padding: 0; } }
+
+/* Herramientas del lector */
+.menu-utilidades { display: flex; flex-wrap: wrap; gap: 8px 20px; padding-bottom: 14px; font-size: .88rem; font-weight: 600; }
+.menu-utilidades a { text-decoration: none; }
+.herramienta { max-width: 850px; margin: 0 auto; }
+.herramienta label { display: block; margin: 16px 0 6px; font-weight: 600; }
+.herramienta input[type=url], .herramienta textarea, .herramienta select { width: 100%; max-width: 100%; padding: 12px; font: inherit; border: 1px solid var(--divisor); border-radius: 10px; background: white; color: var(--tinta); }
+.herramienta .boton, .ficha-receta .boton, .guardar { background: var(--acento-oscuro); color: white; border: 0; cursor: pointer; }
+.guardar[aria-pressed=true] { background: #126c43; }
+.boton.secundaria, .boton.reportar { background: var(--pastilla); color: var(--tinta); border: 0; }
+.estado-utilidad { flex-basis: 100%; font-size: .85rem; margin: 0; }
+.ficha-receta ul { list-style: none; padding-left: 0; }
+.ingrediente-compra { display: flex !important; align-items: flex-start; gap: 10px; margin: 10px 0 !important; font-weight: 400 !important; cursor: pointer; }
+.ingrediente-compra input { width: 20px; height: 20px; margin: 5px 0 0; flex-shrink: 0; accent-color: var(--acento-oscuro); }
+.lista-compras { list-style: none; padding: 0; }
+.lista-compras li { padding: 16px; border: 1px solid var(--divisor); border-radius: 12px; background: white; margin-bottom: 10px; }
+.lista-compras li > .meta { display: block; margin: 8px 0; }
+.comprado .ingrediente-compra span { text-decoration: line-through; color: var(--gris); }
+.indice-articulo { background: var(--fondo); padding: 16px; border-radius: 12px; margin: 24px 0; }
+.indice-articulo h2 { margin-top: 0; font-size: 1.05rem; }
+.indice-articulo ul { margin-bottom: 0; padding-left: 20px; }
+[id^=seccion-] { scroll-margin-top: 20px; }
+.tabla-comparador { width: 100%; border-collapse: collapse; background: white; font-size: .9rem; table-layout: fixed; overflow-wrap: anywhere; }
+.tabla-comparador th, .tabla-comparador td { text-align: left; padding: 12px 10px; border: 1px solid var(--divisor); vertical-align: top; }
+.tabla-comparador caption { text-align: left; font-weight: 800; padding: 12px 0; }
+.fuente-comparador { font-size: .85rem; overflow-wrap: anywhere; }
+.fuente-comparador h2 { font-size: 1rem; }
+@media print {
+ .menu-utilidades, .indice-articulo, .ingrediente-compra input { display: none !important; }
+ .ficha-receta .acciones-articulo { display: none !important; }
+}
+.herramienta .dos > div { min-width: 0; }
+.herramienta select { min-width: 0; }
