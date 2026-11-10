@@ -188,3 +188,49 @@ table.ranking th, table.pares th, table.otros th { font-size: .8rem; text-transf
 .lede { color: var(--gris); margin: -.4em 0 .9em; }
 .ojo { font-size: .88rem; color: var(--gris); border-left: 3px solid var(--borde);
        padding-left: 10px; margin-top: .8em; }
+
+/* Explorar y buscar */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--acento-oscuro); outline-offset: 3px; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+.busqueda-cabecera.ancho { justify-content: flex-start; min-height: 0; padding-bottom: 16px; gap: 8px; }
+.busqueda-cabecera label { font-size: .85rem; font-weight: 600; }
+.busqueda-cabecera input { flex: 1; min-width: 140px; max-width: 480px; }
+input[type=search], select { padding: 10px 12px; border: 1px solid var(--divisor); border-radius: 10px; background: white; color: var(--tinta); }
+.busqueda-cabecera button, .campo-busqueda button, #mas-resultados { background: var(--tinta); color: white; border: 0; border-radius: 10px; padding: 10px 16px; }
+.explorar { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 24px 0 32px; }
+.explorar a { padding: 18px; border-radius: 12px; background: var(--blanco); border: 1px solid var(--linea); text-decoration: none; color: var(--tinta); }
+.explorar a:hover { background: var(--pastilla); }
+.explorar strong, .explorar span { display: block; }
+.explorar span { color: var(--gris); font-size: .82rem; margin-top: 6px; line-height: 1.45; }
+.busqueda { max-width: 940px; margin: 0 auto; }
+.busqueda label { display: block; margin: 18px 0 6px; font-weight: 600; }
+.campo-busqueda { display: flex; gap: 8px; }
+.campo-busqueda input { flex: 1; min-width: 0; }
+.resultado { padding: 16px; }
+.resultado h2, .resultado .meta { margin: 0 0 10px; }
+.resultado p { font-size: .9rem; }
+#mas-resultados { margin: 24px 0; }
+[hidden] { display: none !important; }
+.acciones-articulo { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0; }
+.whatsapp { background: #126c43; color: white; }
+.imprimir { background: var(--pastilla); color: var(--tinta); border: 0; }
+.ficha-receta { background: var(--fondo); padding: 20px; border: 1px solid var(--linea); border-radius: 14px; margin: 24px 0; }
+.ficha-receta h2 { margin-top: 0; }
+.autoria { border-top: 1px solid var(--divisor); padding-top: 18px; display: flex; align-items: center; gap: 5px; }
+.autoria img { flex-shrink: 0; }
+.articulos-autor, .catalogo-recetas { margin-top: 32px; }
+@media (max-width: 420px) {
+  .busqueda-cabecera label { flex-basis: 100%; }
+  .campo-busqueda { flex-wrap: wrap; }
+  .campo-busqueda input { flex-basis: 100%; }
+}
+@media print {
+  body { background: white; font-size: 12pt; }
+  .cabecera, .pie, .acciones-articulo, .mas, .anuncio, .seguir, .etiquetas, .flyer, .carrusel, .autoria, .cifra-caja { display: none !important; }
+  .ancho, .articulo { max-width: none; padding: 0; margin: 0; border: 0; }
+  .ficha-receta { background: white; border: 1px solid #999; break-inside: auto; }
+  .ficha-receta h2, .ficha-receta h3 { break-after: avoid; }
+  .ficha-receta li { break-inside: avoid; }
+  a { color: black; text-decoration: none; }
+}
