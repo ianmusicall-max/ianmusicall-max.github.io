@@ -45,6 +45,22 @@
   });
   applyTheme();
 
+  const languageButton = document.querySelector('[data-idioma]');
+  languageButton?.addEventListener('click', () => {
+    const panel = document.querySelector('#traductor-idioma');
+    if (!panel) return;
+    panel.hidden = false;
+    window.googleTranslateElementInit = () => new google.translate.TranslateElement(
+      {pageLanguage: 'es', includedLanguages: 'en', autoDisplay: false}, panel
+    );
+    if (!document.querySelector('script[data-google-translate]')) {
+      const script = document.createElement('script');
+      script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      script.dataset.googleTranslate = 'true';
+      document.head.appendChild(script);
+    } else if (window.google?.translate) window.googleTranslateElementInit();
+  });
+
   let observer;
   function revealContent() {
     if (reducedMotion.matches || !('IntersectionObserver' in window)) {

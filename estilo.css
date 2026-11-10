@@ -290,6 +290,7 @@ h1, h2, h3 { text-wrap: balance; }
 .texto { font-size: 1.05rem; }
 .articulo .texto p { margin-bottom: 1.35em; }
 .cambiar-tema { border: 1px solid var(--divisor); border-radius: 999px; padding: 8px 12px; color: var(--tinta); background: var(--fondo); font-size: .8rem; font-weight: 600; margin-left: auto; white-space: nowrap; }
+.boton-idioma { border: 1px solid var(--divisor); border-radius: 999px; padding: 8px 12px; color: var(--tinta); background: var(--fondo); font: inherit; font-size: .8rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
 .cabecera .marca { margin-right: auto; }
 .menu { scrollbar-width: thin; }
 .menu a { padding: 7px 12px; }
