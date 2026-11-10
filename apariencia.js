@@ -49,7 +49,13 @@
   languageButton?.addEventListener('click', () => {
     const panel = document.querySelector('#traductor-idioma');
     if (!panel) return;
-    panel.hidden = false;
+    panel.hidden = true;
+    const translateToEnglish = () => {
+      const combo = document.querySelector('.goog-te-combo');
+      if (!combo) {setTimeout(translateToEnglish, 250);return;}
+      combo.value = 'en';
+      combo.dispatchEvent(new Event('change'));
+    };
     window.googleTranslateElementInit = () => new google.translate.TranslateElement(
       {pageLanguage: 'es', includedLanguages: 'en', autoDisplay: false}, panel
     );
@@ -59,6 +65,7 @@
       script.dataset.googleTranslate = 'true';
       document.head.appendChild(script);
     } else if (window.google?.translate) window.googleTranslateElementInit();
+    translateToEnglish();
   });
 
   let observer;
