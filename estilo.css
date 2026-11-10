@@ -272,3 +272,122 @@ main.ancho { padding-top: 24px; padding-bottom: 48px; }
 }
 .herramienta .dos > div { min-width: 0; }
 .herramienta select { min-width: 0; }
+
+/* Ritmo editorial y controles de lectura. */
+:root { --sombra: 0 10px 30px rgb(35 50 58 / 6%); --panel-suave: #e9e8e2; --texto-boton: #fff; color-scheme: light; }
+body { line-height: 1.75; }
+.ancho { max-width: 1180px; }
+main.ancho { padding-top: 36px; padding-bottom: 64px; }
+h1.portada { font-size: clamp(1.65rem, 3.3vw, 2.5rem); letter-spacing: -.035em; line-height: 1.15; max-width: 850px; }
+h1, h2, h3 { text-wrap: balance; }
+.lede { max-width: 780px; margin: 12px 0 28px; font-size: 1.05rem; }
+.lista { gap: 24px; }
+.tarjeta-lista, .destacada, .nota-secundaria, .articulo { box-shadow: var(--sombra); }
+.tarjeta-lista h2 { line-height: 1.35; }
+.tarjeta-lista > .etiqueta-tema { margin: 14px 14px 0; }
+.articulo { max-width: 780px; }
+.articulo h1 { font-size: clamp(1.8rem, 4.3vw, 2.65rem); letter-spacing: -.03em; line-height: 1.15; margin-top: 14px; margin-bottom: 24px; }
+.texto { font-size: 1.05rem; }
+.articulo .texto p { margin-bottom: 1.35em; }
+.cambiar-tema { border: 1px solid var(--divisor); border-radius: 999px; padding: 8px 12px; color: var(--tinta); background: var(--fondo); font-size: .8rem; font-weight: 600; margin-left: auto; white-space: nowrap; }
+.cabecera .marca { margin-right: auto; }
+.menu { scrollbar-width: thin; }
+.menu a { padding: 7px 12px; }
+.menu-utilidades { border-top: 1px solid var(--divisor); padding-top: 12px; padding-bottom: 14px; }
+.solo-lectores { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.etiqueta-tema { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 3px 10px; font-size: .68rem; line-height: 1.8; letter-spacing: .04em; text-transform: uppercase; font-weight: 800; text-decoration: none; background: #e1f0f9; color: #205c78; }
+.tema-recetas { background: #e1edda; color: #355524; }
+.tema-bienestar { background: #ece5f5; color: #604380; }
+.tema-vida-activa { background: #fff0d3; color: #78501c; }
+.tema-actualidad { background: #fbe0d9; color: #863f31; }
+.explorar { margin-top: 32px; margin-bottom: 44px; }
+.explorar a { border: 1px solid var(--divisor); border-top: 4px solid var(--acento); padding: 20px 16px; }
+.explorar a[href$='/recetas/'] { border-top-color: #87a46c; }
+.explorar a[href$='/bienestar/'] { border-top-color: #aa88bd; }
+.explorar a[href$='/vida-activa/'] { border-top-color: #d6a458; }
+.explorar a[href$='/actualidad/'] { border-top-color: var(--borde); }
+.portada-revista { display: grid; gap: 24px; margin-top: 28px; }
+.portada-revista > .destacada { margin-bottom: 0; }
+.portada-secundarias { display: grid; gap: 20px; align-content: stretch; min-width: 0; }
+.nota-secundaria { display: grid; grid-template-columns: minmax(75px, .6fr) minmax(0, 1fr); align-items: center; gap: 16px; background: var(--blanco); border: 1px solid var(--divisor); border-radius: 16px; padding: 18px; min-width: 0; }
+.nota-secundaria:not(:has(img)) { grid-template-columns: minmax(0, 1fr); }
+.nota-secundaria img { width: 100%; height: auto; border-radius: 10px; object-fit: contain; }
+.nota-secundaria h2 { border: 0; padding: 0; margin: 10px 0; font-size: 1.08rem; line-height: 1.3; }
+.nota-secundaria h2 a { color: var(--tinta); text-decoration: none; }
+.nota-secundaria .meta { font-size: .73rem; margin: 10px 0 0; }
+.resumen-secundaria { font-size: .82rem; color: var(--gris); margin: 10px 0 0; }
+#progreso-lectura { position: fixed; top: 0; inset-inline: 0; height: 4px; background: transparent; z-index: 50; pointer-events: none; }
+#progreso-lectura span { display: block; width: 100%; height: 100%; transform: scaleX(0); transform-origin: left; background: var(--acento-oscuro); }
+.volver-arriba { position: fixed; right: max(18px, env(safe-area-inset-right)); bottom: max(18px, env(safe-area-inset-bottom)); z-index: 40; border: 1px solid var(--linea); border-radius: 999px; box-shadow: var(--sombra); padding: 12px 16px; font-size: .85rem; font-weight: 800; color: var(--tinta); background: var(--blanco); }
+@media (min-width: 600px) and (max-width: 979px) { .portada-secundarias { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 980px) {
+  .portada-revista { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); }
+  .portada-revista > .destacada { grid-template-columns: minmax(0, 1fr); padding: 24px; }
+  .portada-revista > .destacada img { max-height: 380px; }
+  .portada-revista .destacada h2 { font-size: 1.8rem; }
+}
+@media (max-width: 599px) {
+  .cambiar-tema { margin-bottom: 8px; }
+  main.ancho { padding-top: 26px; }
+  .nota-secundaria { gap: 12px; padding: 16px; }
+  .resumen-secundaria { display: none; }
+  .volver-arriba span { display: none; }
+  .volver-arriba { padding: 10px 16px; font-size: 1.1rem; }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .tarjeta-lista, .nota-secundaria, .explorar a { transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; }
+  .tarjeta-lista:hover, .nota-secundaria:hover, .explorar a:hover { transform: translateY(-4px); box-shadow: 0 16px 35px rgb(35 50 58 / 12%); border-color: var(--acento); }
+}
+@media (prefers-reduced-motion: no-preference) {
+ .por-aparecer { opacity: 0; transform: translateY(14px); }
+ .aparece { animation: entrada-suave .5s ease-out backwards; }
+ @keyframes entrada-suave { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+}
+@media (prefers-reduced-motion: reduce) {
+ *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+ .por-aparecer { opacity: 1; transform: none; }
+}
+/* Paleta oscura: el papel y las superficies cambian; los flyers se conservan. */
+:root[data-tema=oscuro] {
+ --fondo: #141a1d; --blanco: #20292e; --tinta: #f1f1ea; --gris: #c0c6c8;
+ --acento: #91cce7; --acento-oscuro: #98d8f3; --linea: #537c8f; --pastilla: #2b4452;
+ --caja: #263d49; --borde: #d89b8a; --divisor: #425057; --panel-ad: #263037;
+ --panel-suave: #29373e; --sombra: 0 10px 30px rgb(0 0 0 / 17%); --texto-boton: #152129;
+ color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+ :root:not([data-tema=claro]):not([data-tema=oscuro]) {
+  --fondo: #141a1d; --blanco: #20292e; --tinta: #f1f1ea; --gris: #c0c6c8;
+  --acento: #91cce7; --acento-oscuro: #98d8f3; --linea: #537c8f; --pastilla: #2b4452;
+  --caja: #263d49; --borde: #d89b8a; --divisor: #425057; --panel-ad: #263037;
+  --sombra: 0 10px 30px rgb(0 0 0 / 17%); --texto-boton: #152129;
+  color-scheme: dark;
+ }
+}
+input[type=search], select, .herramienta input[type=url], .herramienta textarea, .herramienta select, .tabla-comparador, .lista-compras li { background: var(--blanco); color: var(--tinta); border-color: var(--divisor); }
+.busqueda-cabecera button, .campo-busqueda button, #mas-resultados { background: var(--tinta); color: var(--blanco); }
+.herramienta .boton, .ficha-receta .boton, .guardar { color: var(--texto-boton); }
+.guardar[aria-pressed=true] { color: white; }
+.boton.secundaria, .boton.reportar { color: var(--tinta); }
+:root[data-tema=oscuro] .marca img { filter: invert(1); }
+:root[data-tema=oscuro] .etiqueta-tema { background: #2b4554; color: #bde4f5; }
+:root[data-tema=oscuro] .tema-recetas { background: #31492e; color: #d0e8bc; }
+:root[data-tema=oscuro] .tema-bienestar { background: #43344f; color: #e2c9f3; }
+:root[data-tema=oscuro] .tema-vida-activa { background: #4d402c; color: #f8deb0; }
+:root[data-tema=oscuro] .tema-actualidad { background: #50372f; color: #ffd4c6; }
+@media print {
+ :root, :root[data-tema=oscuro] { --fondo: white; --blanco: white; --tinta: #141414; --gris: #555; --divisor: #aaa; --sombra: none; color-scheme: light; }
+ .cambiar-tema, .volver-arriba, #progreso-lectura, .etiqueta-tema { display: none !important; }
+ .por-aparecer, .aparece { opacity: 1 !important; transform: none !important; animation: none !important; }
+ .articulo { box-shadow: none; }
+}
+.boton.descarga { color: #14252f; }
+.pastilla { color: #241a16; }
+.nota-secundaria .cifra-chip { margin: 12px 0; font-size: 1.05rem; }
+.por-aparecer:focus-within { opacity: 1; transform: none; }
+@media (max-width: 599px) {
+ .cabecera .marca { font-size: .98rem; min-width: 0; max-width: calc(100% - 58px); gap: 8px; }
+ .cabecera .marca img { width: 36px; height: 36px; }
+ .cambiar-tema { font-size: 0; width: 42px; height: 42px; flex-shrink: 0; margin-bottom: 0; padding: 6px; }
+ .cambiar-tema::before { content: attr(data-icono); font-size: 1.3rem; line-height: 1; }
+}
