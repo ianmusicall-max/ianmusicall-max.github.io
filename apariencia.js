@@ -1,5 +1,18 @@
 'use strict';
 (() => {
+  const navigation = document.querySelector('.navegacion');
+  const mobile = matchMedia('(max-width: 759px)');
+  if (navigation) {
+    const adaptNavigation = () => {navigation.open = !mobile.matches;};
+    adaptNavigation();mobile.addEventListener('change', adaptNavigation);
+    navigation.addEventListener('click', event => {if (mobile.matches && event.target.closest('a')) navigation.open = false;});
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && mobile.matches && navigation.open) {
+        navigation.open = false;navigation.querySelector('summary').focus();event.preventDefault();
+      }
+    });
+    document.addEventListener('pointerdown', event => {if (mobile.matches && navigation.open && !navigation.contains(event.target)) navigation.open = false;});
+  }
   const root = document.documentElement;
   const themeKey = 'salud-tema-v1';
   const systemDark = matchMedia('(prefers-color-scheme: dark)');
