@@ -107,6 +107,7 @@ table.ranking th, table.pares th, table.otros th { font-size: .8rem; text-transf
 .seguir p { margin: 0 0 6px; flex: 1 1 100%; }
 .boton { display: inline-block; text-decoration: none; font-weight: 700; padding: 10px 16px; border-radius: 999px; font-size: .95rem; }
 .boton.fb { background: var(--facebook); color: #fff; }
+.boton.descarga { background: var(--acento); color: var(--tinta); }
 /* La nota principal de la portada: la foto a la izquierda y el texto al lado,
    apilados en el telefono. Es lo unico que rompe la grilla, a proposito: da
    una entrada clara y deja ver de que va la pagina sin leer ocho titulares. */
@@ -234,3 +235,7 @@ input[type=search], select { padding: 10px 12px; border: 1px solid var(--divisor
   .ficha-receta li { break-inside: avoid; }
   a { color: black; text-decoration: none; }
 }
+/* Los flyers contienen texto: se muestran completos en el destacado. */
+main.ancho { padding-top: 24px; padding-bottom: 48px; }
+.destacada img { object-fit: contain; max-height: 520px; background: var(--fondo); }
+@media print { main.ancho { padding: 0; } }
