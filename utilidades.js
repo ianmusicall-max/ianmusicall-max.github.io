@@ -8,8 +8,8 @@
     catch { return []; }
   }
   function write(key, value, status) {
-    try { localStorage.setItem(key, JSON.stringify(value)); return true; }
-    catch { if (status) status.textContent = 'No se pudo guardar en este navegador. Comprueba que el almacenamiento esté permitido.'; return false; }
+    try { localStorage.setItem(key, JSON.stringify(value)); if (status) status.dataset.estado = "exito"; return true; }
+    catch { if (status) {status.dataset.estado = 'error'; status.textContent = 'No se pudo guardar en este navegador. Comprueba que el almacenamiento esté permitido.';} return false; }
   }
   const favorites = () => read(favoritesKey).filter(item => item && safePath(item.ruta) && typeof item.titulo === 'string').slice(0, 200);
   const shopping = () => read(shoppingKey).filter(item => item && safePath(item.ruta) && typeof item.texto === 'string' && item.texto.length <= 500).slice(0, 500);
@@ -23,7 +23,7 @@
     const saved = new Set(favorites().map(item => item.ruta));
     document.querySelectorAll('[data-guardar-ruta]').forEach(button => {
       const active = saved.has(button.dataset.guardarRuta);
-      button.setAttribute('aria-pressed', String(active)); button.textContent = active ? 'Guardado · quitar' : 'Guardar artículo';
+      button.setAttribute('aria-pressed', String(active)); button.textContent = active ? '✓ Guardado · quitar' : 'Guardar artículo';
     });
   }
   document.querySelectorAll('[data-guardar-ruta]').forEach(button => button.addEventListener('click', () => {
@@ -63,7 +63,7 @@
     const actions = element('div', '', 'acciones-articulo'); actions.append(add, link); recipe.append(actions);
     add.addEventListener('click', () => {
       const status = statusAfter(add), selected = checkboxes.filter(item => item.checkbox.checked);
-      if (!selected.length) {status.textContent = 'Selecciona al menos un ingrediente.'; return;}
+      if (!selected.length) {status.dataset.estado = 'aviso';status.textContent = 'Selecciona al menos un ingrediente.'; return;}
       const data = shopping(), route = location.pathname, title = recipe.querySelector('h2')?.textContent || document.querySelector('h1').textContent;
       selected.forEach(item => {if (!data.some(entry => entry.ruta === route && entry.receta === title && entry.texto === item.text)) data.push({ruta: route, receta: title.slice(0, 300), texto: item.text.slice(0, 500), comprado: false});});
       if (data.length > 500) {status.textContent = 'Tu lista llegó al límite de 500 ingredientes. Quita algunos antes de añadir más.';return;}
@@ -90,11 +90,16 @@
     try {if (!navigator.clipboard) throw new Error('clipboard'); await navigator.clipboard.writeText(text); return true;}
     catch {if (fallback) {fallback.hidden = false; fallback.value = text; fallback.focus(); fallback.select();} status.textContent = 'No se pudo copiar automáticamente. Selecciona y copia el texto que aparece abajo.'; return false;}
   }
-  document.querySelector('[data-copiar-compras]')?.addEventListener('click', async () => {
+  document.querySelector('[data-copiar-compras]')?.addEventListener('click', async event => {
+    const button = event.currentTarget;
     const pending = shopping().filter(item => !item.comprado), status = document.querySelector('#estado-compras');
-    if (!pending.length) {status.textContent = 'No quedan ingredientes pendientes para copiar.';return;}
+    if (!pending.length) {status.dataset.estado = 'aviso';status.textContent = 'No quedan ingredientes pendientes para copiar.';return;}
     const text = 'Lista de compras\n\n' + pending.map(item => `• ${item.texto} — ${item.receta}`).join('\n');
-    if (await copy(text, status, document.querySelector('#copiar-manual'))) status.textContent = 'Lista de ingredientes pendientes copiada.';
+    if (await copy(text, status, document.querySelector('#copiar-manual'))) {
+      status.dataset.estado = 'exito'; status.textContent = 'Lista de ingredientes pendientes copiada.';
+      button.textContent = '✓ Lista copiada'; button.dataset.confirmado = 'true';
+      setTimeout(() => {button.textContent = 'Copiar lo que falta';delete button.dataset.confirmado;}, 2200);
+    } else {status.dataset.estado = 'error';}
   });
   document.querySelector('[data-limpiar-compras]')?.addEventListener('click', () => {
     const status = document.querySelector('#estado-compras'); if (write(shoppingKey, shopping().filter(item => !item.comprado), status)) renderShopping();

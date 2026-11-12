@@ -22,6 +22,7 @@
       const link = document.createElement('a');
       link.href = item.ruta;
       link.textContent = item.titulo;
+      const read = document.createElement('span'); read.className = 'leer-articulo'; read.textContent = 'Leer artículo →'; link.append(read);
       title.append(link);
       const description = document.createElement('p');
       description.textContent = item.descripcion;
